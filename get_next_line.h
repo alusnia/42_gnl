@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/22 18:23:20 by alusnia           #+#    #+#             */
+/*   Updated: 2025/10/22 18:37:07 by alusnia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE
+# define GET_NEXT_LINE
+# include <stdlib.h>
+# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+typedef struct s_list
+{
+	char			*content;
+	int				fd;
+	size_t			line_len;
+	struct s_list	*next;
+	struct s_list	*prev;
+}	t_str_list;
+
+char	*del_lst_content(t_str_list *lst, t_str_list ***start_lst, size_t *i, char *str);
+char	*export_line(t_str_list *lst, t_str_list **start_lst, ssize_t count);
+t_str_list	*create_node(t_str_list *lst, t_str_list *prev,
+	t_str_list ***start_lst, int fd);
+t_str_list	*look_for_lst(int fd, t_str_list **start_lst);
+int	read_buffer(char *str, int fd, ssize_t *count, t_str_list *lst);
+
+#endif
